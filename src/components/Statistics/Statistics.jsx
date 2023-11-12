@@ -1,0 +1,39 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  Label,
+  Percentage,
+  StatList,
+  StatListItem,
+  StatSection,
+  Title,
+} from './Statistics.styled';
+
+const Statistics = ({ title, stats }) => {
+  return (
+    <StatSection>
+      {title && <Title>{title}</Title>}
+      <StatList>
+        {stats.map(item => (
+          <StatListItem key={item.id}>
+            <Label>{item.label}</Label>
+            <Percentage>{item.percentage}%</Percentage>
+          </StatListItem>
+        ))}
+      </StatList>
+    </StatSection>
+  );
+};
+
+Statistics.propTypes = {
+  title: PropTypes.string,
+  stats: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string,
+      percentage: PropTypes.number,
+    })
+  ),
+};
+
+export default Statistics;
